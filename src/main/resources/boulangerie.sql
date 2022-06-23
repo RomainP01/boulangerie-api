@@ -52,22 +52,18 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `telephone`) VALUES
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idProduit` int(11) NOT NULL,
-  `idClient` int(11) NOT NULL,
   `date` date NOT NULL,
   `heure` time NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_foreign_key_name` (`idProduit`),
-  KEY `fk_foreign_key_name2` (`idClient`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `idProduit`, `idClient`, `date`, `heure`) VALUES
-(1, 1, 1, '2022-06-23', '13:33:38'),
-(2, 2, 1, '2022-06-22', '12:33:38');
+INSERT INTO `commande` (`id`, `date`, `heure`) VALUES
+(1, '2022-06-23', '13:33:38'),
+(2, '2022-06-22', '12:33:38');
 
 -- --------------------------------------------------------
 

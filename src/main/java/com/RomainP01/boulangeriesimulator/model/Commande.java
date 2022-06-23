@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.Date;
 
 @Getter
@@ -21,10 +22,11 @@ public class Commande implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    @Column(name="idClient")
-    private int idClient;
-    @Column(name="idProduit")
-    private int idProduit;
+    @ManyToOne
+    @JoinColumn(name = "client_fk")
+    private Client client;
+    @ManyToMany
+    private Collection<Produit> produits;
     @Column( name = "date")
     private LocalDate date;
     @Column(name = "heure")
