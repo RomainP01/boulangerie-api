@@ -2,8 +2,10 @@ package com.RomainP01.boulangeriesimulator.controller;
 
 import com.RomainP01.boulangeriesimulator.model.Client;
 import com.RomainP01.boulangeriesimulator.model.Commande;
+import com.RomainP01.boulangeriesimulator.model.Produit;
 import com.RomainP01.boulangeriesimulator.services.ClientService;
 import com.RomainP01.boulangeriesimulator.services.CommandeService;
+import com.RomainP01.boulangeriesimulator.services.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,8 @@ import java.util.Optional;
 public class BoulangerieController {
     @Autowired
     private ClientService clientService;
-
+    @Autowired
+    private ProduitService produitService;
     @Autowired
     private CommandeService commandeService;
     @GetMapping("/clients")
@@ -84,4 +87,37 @@ public class BoulangerieController {
         commandeService.deleteById(cmd.getId());
         return "Command "+id+" has been deleted";
     }
+
+    @GetMapping("/produits")
+    public List<Produit> getAllProduits() {
+        return produitService.getAllProduits();
+    }
+
+    @GetMapping("/produits/{id}")
+    public Optional<Produit> getProduitById(@PathVariable("id") int id) {
+        return produitService.getProduitById(id);
+    }
+
+    @PostMapping(value="/produits")
+    public Produit addProduit(@RequestBody Produit produit) {
+        return produitService.save(produit);
+    }
+
+    @PutMapping(value="/produits/{id}")
+    public Produit updateProduit(@PathVariable("id") int id, @RequestBody Produit produit) {
+        Produit prd = produitService.getProduitById(id)
+                .orElseThrow(()->new RuntimeException("Produit with "+id+" is not found!"));
+        prd.setLabel(produit.getLabel());
+        prd.setPrix(produit.getPrix());
+        return produitService.save(prd);
+    }
+
+    @DeleteMapping(value="/produits/{id}")
+    public String deleteProduit(@PathVariable("id") int id) {
+        Produit prd = produitService.getProduitById(id)
+                .orElseThrow(()->new RuntimeException("Produit with "+id+" is not found!"));
+        produitService.deleteById(prd.getId());
+        return "Produit "+id+" has been deleted";
+    }
+
 }
