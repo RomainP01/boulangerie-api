@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 23 juin 2022 à 13:20
+-- Généré le : jeu. 23 juin 2022 à 13:45
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -76,8 +76,10 @@ INSERT INTO `commande` (`id`, `date`, `heure`, `client_fk`) VALUES
 DROP TABLE IF EXISTS `commande_produits`;
 CREATE TABLE IF NOT EXISTS `commande_produits` (
   `commande_id` int(11) NOT NULL,
-  `produits_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `produits_id` int(11) NOT NULL,
+  KEY `FK4oeer8rfsckn2ftbtymewfjqx` (`produits_id`),
+  KEY `FKnlo35ev2ww1vswb3uylnq5flk` (`commande_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commande_produits`
