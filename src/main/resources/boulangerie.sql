@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 21 juin 2022 à 09:52
+-- Généré le : jeu. 23 juin 2022 à 11:35
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -56,12 +56,18 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `idClient` int(11) NOT NULL,
   `date` date NOT NULL,
   `heure` time NOT NULL,
-  `id_client` int(11) DEFAULT NULL,
-  `id_produit` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_foreign_key_name` (`idProduit`),
   KEY `fk_foreign_key_name2` (`idClient`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id`, `idProduit`, `idClient`, `date`, `heure`) VALUES
+(1, 1, 1, '2022-06-23', '13:33:38'),
+(2, 2, 1, '2022-06-22', '12:33:38');
 
 -- --------------------------------------------------------
 
@@ -75,7 +81,15 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `label` varchar(50) NOT NULL,
   `prix` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `produit`
+--
+
+INSERT INTO `produit` (`id`, `label`, `prix`) VALUES
+(1, 'pain au chocolat', 0.9),
+(2, 'croissant', 0.8);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
