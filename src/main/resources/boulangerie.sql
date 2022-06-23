@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 23 juin 2022 à 11:35
+-- Généré le : jeu. 23 juin 2022 à 13:20
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -54,16 +54,41 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `heure` time NOT NULL,
-  PRIMARY KEY (`id`)
+  `client_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK7wa46dao6r8qt0qt1m2haw2e1` (`client_fk`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `date`, `heure`) VALUES
-(1, '2022-06-23', '13:33:38'),
-(2, '2022-06-22', '12:33:38');
+INSERT INTO `commande` (`id`, `date`, `heure`, `client_fk`) VALUES
+(1, '2022-06-23', '13:33:38', 1),
+(2, '2022-06-22', '12:33:38', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande_produits`
+--
+
+DROP TABLE IF EXISTS `commande_produits`;
+CREATE TABLE IF NOT EXISTS `commande_produits` (
+  `commande_id` int(11) NOT NULL,
+  `produits_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `commande_produits`
+--
+
+INSERT INTO `commande_produits` (`commande_id`, `produits_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 1),
+(1, 2),
+(2, 1);
 
 -- --------------------------------------------------------
 
